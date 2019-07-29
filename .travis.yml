@@ -1,0 +1,23 @@
+language: bash
+
+notifications:
+  email: false
+
+env:
+  REST_SERVER_VER=1.14
+
+services:
+  - docker
+
+script:
+  - docker build --build-arg REST_SERVER_VER=${REST_SERVER_VER} -t ingvord/tango-cs-with-rest .
+
+before_deploy:
+  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+  - docker tag ingvord/tango-cs-with-rest ingvord/tango-cs-with-rest:${REST_SERVER_VER}
+
+deploy:
+  - provider: script
+    script: docker push ingvord/tango-cs-with-rest:${REST_SERVER_VER}
+    on:
+      all_branches: true

@@ -21,7 +21,7 @@ COPY --from=rest-server /usr/local/bin usr/local/bin
 RUN runtimeDeps='ca-certificates openjdk-8-jre-headless' \
     && sudo mkdir -p /usr/share/man/man1 \
     && DEBIAN_FRONTEND=noninteractive sudo apt-get update \
-    && DEBIAN_FRONTEND=noninteractive sudo apt-get -y install --no-install-recommends $runtimeDeps \
+    && DEBIAN_FRONTEND=noninteractive sudo apt-get -y install --no-install-recommends $runtimeDeps
 
 COPY rest.conf      /etc/supervisor/conf.d/
 

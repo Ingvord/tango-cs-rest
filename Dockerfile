@@ -32,6 +32,8 @@ ENV TANGO_HOST=127.0.0.1:${ORB_PORT}
 
 EXPOSE ${ORB_PORT}
 
+USER root
+
 CMD /usr/local/bin/wait-for-it.sh $MYSQL_HOST --timeout=30 --strict -- \
     /usr/bin/supervisord -c /etc/supervisord.conf
 

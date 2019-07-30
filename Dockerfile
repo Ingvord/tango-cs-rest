@@ -24,6 +24,7 @@ RUN runtimeDeps='ca-certificates openjdk-8-jre-headless' \
     && DEBIAN_FRONTEND=noninteractive sudo apt-get -y install --no-install-recommends $runtimeDeps
 
 COPY rest.conf      /etc/supervisor/conf.d/
+COPY tango-test.conf      /etc/supervisor/conf.d/
 
 
 ENV LD_LIBRARY_PATH=/usr/local/lib

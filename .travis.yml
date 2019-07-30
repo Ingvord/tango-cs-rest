@@ -4,24 +4,24 @@ notifications:
   email: false
 
 env:
-  REST_SERVER_VER=1.14
+  REST_SERVER_VER=1.14 DOCKER_IMAGE=ingvord/tango-cs-with-rest
 
 services:
   - docker
 
 script:
-  - docker build --build-arg REST_SERVER_VER=${REST_SERVER_VER} -t ingvord/tango-cs-with-rest .
+  - docker build --build-arg REST_SERVER_VER=${REST_SERVER_VER} -t ${DOCKER_IMAGE} .
 
 before_deploy:
   - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
-  - docker tag ingvord/tango-cs-with-rest ingvord/tango-cs-with-rest:${REST_SERVER_VER}
+  - docker tag ${DOCKER_IMAGE} ingvord/${DOCKER_IMAGE}:${TRAVIS_BRANCH}
 
 deploy:
   - provider: script
-    script: docker push ingvord/tango-cs-with-rest:latest
+    script: docker push ${DOCKER_IMAGE}:latest
     on:
       all_branches: true
   - provider: script
-    script: docker push ingvord/tango-cs-with-rest:${REST_SERVER_VER}
+    script: docker push ${DOCKER_IMAGE}:${TRAVIS_TAG}
     on:
-      all_branches: true
+      tags: true

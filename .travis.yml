@@ -20,7 +20,7 @@ deploy:
   - provider: script
     script: docker push ${DOCKER_IMAGE}:latest
     on:
-      all_branches: true
+      branche: master
   - provider: script
     script: docker push ${DOCKER_IMAGE}:${TRAVIS_TAG}
     on:

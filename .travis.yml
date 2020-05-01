@@ -4,7 +4,7 @@ notifications:
   email: false
 
 env:
-  REST_SERVER_VER=1.14 DOCKER_IMAGE=ingvord/tango-cs-with-rest
+  REST_SERVER_VER=1.20 DOCKER_IMAGE=ingvord/tango-cs-with-rest
 
 services:
   - docker
